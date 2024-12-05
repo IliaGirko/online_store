@@ -1,0 +1,73 @@
+[
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "name": "Спам почтовых ящиков",
+        "description": "Забрасываем рассылками почтовые ящики",
+        "image": "",
+        "category": 5,
+        "price": 10000,
+        "created_at": "2021-11-11T21:00:00Z",
+        "updated_at": "2022-12-31T21:00:00Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "name": "Бот автоматического ответа на сообщения",
+        "description": "Отвечает только да или нет",
+        "image": "",
+        "category": 6,
+        "price": 1000,
+        "created_at": "2021-11-11T21:00:00Z",
+        "updated_at": "2022-12-31T21:00:00Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+        "name": "Онлайн-магазин",
+        "description": "Сайт продажи инженерного оборудования",
+        "image": "",
+        "category": 8,
+        "price": 100000,
+        "created_at": "2021-11-11T21:00:00Z",
+        "updated_at": "2022-12-31T21:00:00Z"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+        "name": "Рассылки",
+        "description": null
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 6,
+    "fields": {
+        "name": "Телеграм боты",
+        "description": null
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 7,
+    "fields": {
+        "name": "Полезные утилиты",
+        "description": null
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 8,
+    "fields": {
+        "name": "Веб-приложения",
+        "description": null
+    }
+}
+]
