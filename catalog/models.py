@@ -3,7 +3,7 @@ from django.db import models
 
 class Product(models.Model):
     name = models.CharField(max_length=150, verbose_name="Наименование")
-    description = models.TextField(verbose_name="Описание", null=True, blank=True)
+    description = models.CharField(max_length=300, verbose_name="Описание", null=True, blank=True)
     image = models.ImageField(verbose_name="Фото", null=True, blank=True)
     category = models.ForeignKey(
         "Category",
@@ -13,9 +13,9 @@ class Product(models.Model):
         null=True,
         blank=True,
     )
-    price = models.IntegerField(verbose_name="Цена")
-    created_at = models.DateTimeField(verbose_name="Дата создания")
-    updated_at = models.DateTimeField(verbose_name="Дата последнего изменения")
+    price = models.PositiveIntegerField(verbose_name="Цена")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата последнего изменения")
 
     def __str__(self):
         return f"Наименование - {self.name}, стоимость = {self.price}"
