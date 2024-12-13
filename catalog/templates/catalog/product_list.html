@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "catalog/base.html" %}
 {% load my_tags %}
 {% block content %}
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
@@ -8,7 +8,8 @@
 </div>
 <div class="container">
     <div class="row text-center">
-        {% for product in products %}
+        <a class="btn btn-primary" href="{% url 'catalog:product_form' %}" role="button">Создать новый объект</a>
+        {% for product in object_list %}
         <div class="col-4">
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
@@ -20,7 +21,8 @@
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                         <p>{{ product.description|truncatechars:100}}</p>
                     </ul>
-                    <a class="btn btn-primary" href="{% url 'catalog:get_product' product.pk %}" role="button">Подробнее</a>
+                    <a class="btn btn-primary" href="{% url 'catalog:product_detail' product.pk %}" role="button">Подробнее</a>
+
                 </div>
             </div>
         </div>
