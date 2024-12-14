@@ -1,16 +1,16 @@
-{% extends "catalog/base.html" %}
-{% load my_tags %}
+{% extends "blog/base.html" %}
+{% load my_tag %}
 {% block content %}
 <div class="container">
     <div class="row text-center">
         <div class="row-item col-4">
             <div class="card mb-4 box-shadow">
-                <h4 class="my-0 font-weight-normal">Создание объекта</h4>
+                <h4 class="my-0 font-weight-normal">Создание новости</h4>
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form.as_p }}
                         <button type="submit" class="btn btn-primary">Сохранить</button>
-                        <a class="btn btn-primary" href="{% url 'catalog:product_list' %}" role="button">Назад</a>
+                        <a class="btn btn-danger" href="{% url 'blog:post_list' %}" role="button">Назад</a>
                 </form>
             </div>
         </div>

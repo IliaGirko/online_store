@@ -1,0 +1,20 @@
+{% extends "blog/base.html" %}
+{% load my_tag %}
+{% block content %}
+
+<main class="container">
+  <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
+    <div class="col-lg-6 px-0">
+      <h1 class="display-4 fst-italic">{{ object.title }}</h1>
+      <p class="lead my-3">{{ object.content }}</p>
+      <img src="{{ post.image | media_fil }}" class="img-thumbnail">
+      <p class="lead my-3">Дата публикации: {{ object.created_at|date:"d-m-Y" }}</p>
+      <p class="lead my-3">Количество просмотров: {{ object.counted_views }}</p>
+      <p class="lead mb-0"><a href="{% url 'blog:post_update' object.pk%}" class="text-body-emphasis fw-bold">Редактировать</a></p>
+      <p class="lead mb-0"><a href="{% url 'blog:post_list' %}" class="text-body-emphasis fw-bold">Вернуться к списку</a></p>
+      <p class="lead mb-0"><a href="{% url 'blog:post_delete' object.pk%}" class="text-body-emphasis fw-bold">Удалить</a></p>
+    </div>
+  </div>
+</main>
+
+{% endblock %}
