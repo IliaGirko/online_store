@@ -4,6 +4,8 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from blog.models import Post
 
+from .forms import ProductForm
+
 
 class PostListView(ListView):
     model = Post
@@ -25,21 +27,13 @@ class PostDetailView(DetailView):
 class PostCreateView(CreateView):
     model = Post
     success_url = reverse_lazy("blog:post_list")
-    fields = [
-        "title",
-        "content",
-        "image",
-    ]
+    form_class = ProductForm
 
 
 class PostUpdateView(UpdateView):
     model = Post
     success_url = reverse_lazy("blog:post_list")
-    fields = [
-        "title",
-        "content",
-        "image",
-    ]
+    form_class = ProductForm
 
     def get_success_url(self):
         return reverse("blog:post_detail", args=[self.kwargs.get("pk")])
