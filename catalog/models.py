@@ -3,9 +3,7 @@ from django.db import models
 
 class Product(models.Model):
     name = models.CharField(max_length=150, verbose_name="Наименование")
-    description = models.CharField(
-        max_length=300, verbose_name="Описание", null=True, blank=True, default="Описание отсутствует"
-    )
+    description = models.TextField(verbose_name="Описание", null=True, blank=True, default="Описание отсутствует")
     image = models.ImageField(verbose_name="Фото", null=True, blank=True)
     category = models.ForeignKey(
         "Category",

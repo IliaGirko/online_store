@@ -3,14 +3,15 @@
 {% block content %}
 <div class="container">
     <div class="row text-center">
-        <div class="row-item col-4">
+        <div class="row-item col-6">
             <div class="card mb-4 box-shadow">
                 <h4 class="my-0 font-weight-normal">Создание объекта</h4>
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
+                    {{ form.non_field_errors }}
                     {{ form.as_p }}
                         <button type="submit" class="btn btn-primary">Сохранить</button>
-                        <a class="btn btn-primary" href="{% url 'catalog:product_list' %}" role="button">Назад</a>
+                        <a class="btn btn-danger" href="{% url 'catalog:product_list' %}" role="button">Назад</a>
                 </form>
             </div>
         </div>

@@ -4,6 +4,8 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from catalog.models import Product
 
+from .forms import ProductForm
+
 
 class ProductListView(ListView):
     model = Product
@@ -16,25 +18,13 @@ class ProductDetailView(DetailView):
 class ProductCreateView(CreateView):
     model = Product
     success_url = reverse_lazy("catalog:product_list")
-    fields = [
-        "name",
-        "description",
-        "price",
-        "image",
-        "category",
-    ]
+    form_class = ProductForm
 
 
 class ProductUpdateView(UpdateView):
     model = Product
     success_url = reverse_lazy("catalog:product_list")
-    fields = [
-        "name",
-        "description",
-        "price",
-        "image",
-        "category",
-    ]
+    form_class = ProductForm
 
 
 class ProductDeleteView(DeleteView):
