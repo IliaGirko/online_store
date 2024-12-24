@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 
 from .forms import UserRegisterForm
-from django.views.generic import CreateView
+from django.views.generic import CreateView, View
 from config.settings import DEFAULT_FROM_EMAIL
 
 class UserRegisterCreateView(CreateView):
