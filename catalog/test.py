@@ -1,10 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseForbidden
-from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import DetailView, View, ListView, TemplateView
+from django.urls import reverse_lazy
+from django.views.generic import DetailView, ListView, TemplateView, View
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+
 from catalog.models import Product
 
 from .forms import ProductForm
@@ -16,6 +17,7 @@ class ProductListView(ListView):
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
+
     def post(self, pk):
         product = get_object_or_404(Product, pk=pk)
         user = self.request.user

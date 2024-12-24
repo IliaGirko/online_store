@@ -1,10 +1,11 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseForbidden
-from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import DetailView, View, ListView, TemplateView
+from django.urls import reverse_lazy
+from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+
 from catalog.models import Product
 
 from .forms import ProductForm
@@ -16,6 +17,7 @@ class ProductListView(ListView):
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
+
     def post(self, request, pk):
         product = get_object_or_404(Product, pk=pk)
         user = request.user
@@ -24,8 +26,8 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
         if product.owner != user:
             count += 1
         if not request.user.has_perm("catalog.can_unpublish_product"):
-            count +=1
-        if count>1:
+            count += 1
+        if count > 1:
             return HttpResponseForbidden("У Вас нет права отменять публикацию")
         # elif not :
         #     return HttpResponseForbidden("У Вас нет права отменять публикацию")

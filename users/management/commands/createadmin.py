@@ -1,9 +1,11 @@
 import os
-from dotenv import load_dotenv
-from django.core.management.base import BaseCommand
+
 from django.contrib.auth import get_user_model
+from django.core.management.base import BaseCommand
+from dotenv import load_dotenv
 
 load_dotenv()
+
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
@@ -13,12 +15,10 @@ class Command(BaseCommand):
             username="admin",
         )
         user.set_password(os.getenv("ADMIN_PASSWORD"))
-        user.is_active=True
-        user.is_staff=True
-        user.is_superuser=True
+        user.is_active = True
+        user.is_staff = True
+        user.is_superuser = True
 
         user.save()
 
         self.stdout.write(self.style.SUCCESS(f"Админ {user.username} создан успешно"))
-
-
