@@ -1,5 +1,5 @@
 from django.db import models
-
+from users.models import CustomUser
 
 class Product(models.Model):
     name = models.CharField(max_length=150, verbose_name="Наименование")
@@ -16,6 +16,14 @@ class Product(models.Model):
     price = models.PositiveIntegerField(verbose_name="Цена")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата последнего изменения")
+    is_active = models.BooleanField(default=False, verbose_name="Опубликовано")
+    owner = models.ForeignKey(to=CustomUser,
+                              on_delete=models.CASCADE,
+                              verbose_name="Владелец публикации",
+                              null=True,
+                              blank=True,
+                              )
+
 
     def __str__(self):
         return f"Наименование - {self.name}, стоимость = {self.price}"
@@ -23,6 +31,9 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Товар"
         verbose_name_plural = "Товары"
+        permissions = [
+            ("can_unpublish_product", "Can unpublish product"),
+        ]
 
 
 class Category(models.Model):
