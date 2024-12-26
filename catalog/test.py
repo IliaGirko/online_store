@@ -1,9 +1,9 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, ListView, TemplateView
+from django.views.generic import DetailView, ListView, TemplateView, View
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from catalog.models import Product
@@ -18,19 +18,12 @@ class ProductListView(ListView):
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
 
-    def post(self, request, pk):
+    def post(self, pk):
         product = get_object_or_404(Product, pk=pk)
-        user = request.user
-        count: int = 0
-        print(product.owner)
-        if product.owner != user:
-            count += 1
-        if not request.user.has_perm("catalog.can_unpublish_product"):
-            count += 1
-        if count > 1:
+        user = self.request.user
+        if not user.has_perm("catalog.can_unpublish_product") or product.owner != user:
             return HttpResponseForbidden("У Вас нет права отменять публикацию")
-        # elif not :
-        #     return HttpResponseForbidden("У Вас нет права отменять публикацию")
+
         product.is_active = False
         product.save()
 
@@ -54,15 +47,6 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     success_url = reverse_lazy("catalog:product_list")
     form_class = ProductForm
-
-    def get_object(self, queryset=None):
-        product = super().get_object(queryset)
-        user = self.request.user
-
-        if product.owner == user or user.has_perm("catalog.can_unpublish_product"):
-            return product
-
-        raise PermissionDenied
 
 
 class ProductDeleteView(LoginRequiredMixin, DeleteView):

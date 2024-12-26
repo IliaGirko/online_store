@@ -1,6 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm
 
-
 from .models import CustomUser
 
 
@@ -23,12 +22,12 @@ class UserRegisterForm(UserCreationForm):
 
         self.fields["username"].widget.attrs.update({"class": "form-control", "placeholder": "Введите username"})
 
-        self.fields["country"].widget.attrs.update(
-            {"class": "form-control", "placeholder": "Укажите Вашу страну"}
-        )
+        self.fields["country"].widget.attrs.update({"class": "form-control", "placeholder": "Укажите Вашу страну"})
 
         self.fields["phone_number"].widget.attrs.update({"class": "form-control", "placeholder": "Укажите телефон"})
 
         self.fields["password1"].widget.attrs.update({"class": "form-control", "placeholder": "Введите пароль"})
 
-        self.fields["password2"].widget.attrs.update({"class": "form-control", "placeholder": "Введите пароль еще раз"})
+        self.fields["password2"].widget.attrs.update(
+            {"class": "form-control", "placeholder": "Введите пароль еще раз"}
+        )
