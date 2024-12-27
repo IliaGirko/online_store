@@ -8,16 +8,10 @@
 </div>
 <div class="container">
     <div class="row text-center">
-        <a class="btn btn-primary mb-3" href="{% url 'catalog:product_form' %}" role="button">Создать новый объект</a>
-        <form method="post" enctype="multipart/form-data">
-            <h3 class="mb-3">Выбрать категорию продукта для отображения</h3>
-            {% csrf_token %}
-            {% for product in object_list %}
-                <a class="btn btn-warning mb-3" href="{% url 'catalog:select_product_list' product.category.pk %}" role="button">{{ product.category.name }}</a>
-            {% endfor %}
-        </form>
-        {% for product in object_list %}
-        <div class="col-4">
+
+{% for product in object_list %}
+
+<div class="col-6">
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">{{ product.name }}</h4>
@@ -33,7 +27,5 @@
                 </div>
             </div>
         </div>
-        {% endfor %}
-    </div>
-</div>
+{% endfor %}
 {% endblock %}
