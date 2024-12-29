@@ -27,8 +27,8 @@ class ProductListView(ListView):
     def get_queryset(self):
         return ProductByCatalog.get_queryset_product_list()
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(ProductListView, self).get_context_data(**kwargs)
         context["categories_list"] = Category.objects.all()
         return context
 
