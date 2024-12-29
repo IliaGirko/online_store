@@ -12,8 +12,8 @@
         <form method="post" enctype="multipart/form-data">
             <h3 class="mb-3">Выбрать категорию продукта для отображения</h3>
             {% csrf_token %}
-            {% for product in object_list %}
-                <a class="btn btn-warning mb-3" href="{% url 'catalog:select_product_list' product.category.pk %}" role="button">{{ product.category.name }}</a>
+            {% for category in categories_list %}
+                <a class="btn btn-warning mb-3" href="{% url 'catalog:select_product_list' category.pk %}" role="button">{{ category.name }}</a>
             {% endfor %}
         </form>
         {% for product in object_list %}

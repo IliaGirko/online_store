@@ -8,9 +8,8 @@ from django.views.decorators.cache import cache_page
 from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from catalog.models import Product
-
 from .forms import ProductForm
+from .models import Category, Product
 from .services import ProductByCatalog
 
 
@@ -27,6 +26,11 @@ class ProductListView(ListView):
 
     def get_queryset(self):
         return ProductByCatalog.get_queryset_product_list()
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["categories_list"] = Category.objects.all()
+        return context
 
 
 @method_decorator(cache_page(60), name="dispatch")
